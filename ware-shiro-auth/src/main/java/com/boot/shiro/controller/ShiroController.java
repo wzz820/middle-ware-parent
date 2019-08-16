@@ -1,11 +1,11 @@
 package com.boot.shiro.controller;
 
-import com.boot.shiro.config.UserRealm;
+import com.boot.shiro.entity.SysUserEntity;
 import com.boot.shiro.mapper.SysMenuMapper;
 import com.boot.shiro.util.ShiroUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class ShiroController {
     private static Logger LOGGER = LoggerFactory.getLogger(ShiroController.class) ;
 
     @Resource
-    private SysMenuMapper sysMenuMapper ;
+    private SysMenuMapper sysMenuMapper;
     /**
      * 登录测试
      * http://localhost:7011/userLogin?userName=admin&passWord=admin
@@ -50,6 +50,8 @@ public class ShiroController {
     @RequestMapping("/menu/list")
     @RequiresPermissions("sys:user:shiro")
     public List list(){
+        SysUserEntity user = (SysUserEntity)SecurityUtils.getSubject().getPrincipal();
+        System.out.println(user.getUsername()+"------"+user.getPassword());
         return sysMenuMapper.selectList() ;
     }
 
