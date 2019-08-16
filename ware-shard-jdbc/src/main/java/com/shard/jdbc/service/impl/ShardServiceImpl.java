@@ -35,7 +35,7 @@ public class ShardServiceImpl implements ShardService {
     @Override
     public void createTable() {
         for (int i = 1 ; i <= 5 ; i++){
-            String executeSQL = "CREATE TABLE table_test_"+i+" (\n" +
+            String executeSQL = "CREATE TABLE table_one_"+i+" (\n" +
                     "  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',\n" +
                     "  `phone` varchar(20) NOT NULL COMMENT '手机号',\n" +
                     "  `back_one` varchar(50) DEFAULT NULL COMMENT '备用1',\n" +
@@ -44,8 +44,23 @@ public class ShardServiceImpl implements ShardService {
                     "  PRIMARY KEY (`id`),\n" +
                     "  KEY `phoneIndex` (`phone`)\n" +
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8;" ;
-            dataTwoTemplate.execute(executeSQL);
-            dataThreeTemplate.execute(executeSQL);
+            jdbcTemplate.execute(executeSQL);
+            /*dataTwoTemplate.execute(executeSQL);
+            dataThreeTemplate.execute(executeSQL);*/
+        }
+        for (int i = 1 ; i <= 5 ; i++){
+            String executeSQL = "CREATE TABLE table_two_"+i+" (\n" +
+                    "  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',\n" +
+                    "  `phone` varchar(20) NOT NULL COMMENT '手机号',\n" +
+                    "  `back_one` varchar(50) DEFAULT NULL COMMENT '备用1',\n" +
+                    "  `back_two` varchar(50) DEFAULT NULL COMMENT '备用2',\n" +
+                    "  `back_three` varchar(50) DEFAULT NULL COMMENT '备用3',\n" +
+                    "  PRIMARY KEY (`id`),\n" +
+                    "  KEY `phoneIndex` (`phone`)\n" +
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8;" ;
+            jdbcTemplate.execute(executeSQL);
+            /*dataTwoTemplate.execute(executeSQL);
+            dataThreeTemplate.execute(executeSQL);*/
         }
     }
 
